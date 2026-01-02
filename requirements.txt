@@ -1,0 +1,21 @@
+fastapi
+uvicorn[standard]
+pydantic>=2.7.0
+pyyaml
+requests
+httpx
+streamlit
+orjson
+mlflow
+transformers>=4.38.0
+peft>=0.10.0
+accelerate>=0.28.0
+# bitsandbytes has limited Windows support; guarded to avoid install issues
+bitsandbytes==0.43.1; platform_system != "Windows"
+torch
+sentencepiece
+optimum
+ortools>=9.10,<9.12
+pandas
+rich
+python-dotenv
