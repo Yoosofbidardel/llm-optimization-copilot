@@ -1,0 +1,24 @@
+api:
+  host: "127.0.0.1"
+  port: 8010
+  timeout_seconds: 30
+
+model:
+  base_model: "HuggingFaceH4/zephyr-7b-beta"
+  lora_source: null
+  temperature: 0.0
+  max_new_tokens: 512
+
+solver:
+  must_assign_all_tasks: true
+
+evals:
+  parse_success_threshold: 0.8
+  solve_success_threshold: 0.8
+  latency_p95_threshold_ms: 20000
+
+registry:
+  tracking_uri: null
+  registry_uri: null
+  model_name: "optim-copilot-parser"
+  stage: "Staging"

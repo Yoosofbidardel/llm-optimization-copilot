@@ -1,0 +1,21 @@
+{
+  "prompt": "Assign tasks task1 and task2. Resources: alpha (capacity 1) beta (capacity 2). Costs: task1 alpha 5 beta 1; task2 alpha 2 beta 4. All tasks must be assigned.",
+  "expected_spec": {
+    "tasks": [
+      {"id": "task1", "cost_per_resource": {"alpha": 5, "beta": 1}},
+      {"id": "task2", "cost_per_resource": {"alpha": 2, "beta": 4}}
+    ],
+    "resources": [
+      {"id": "alpha", "capacity": 1},
+      {"id": "beta", "capacity": 2}
+    ],
+    "must_assign_all_tasks": true
+  },
+  "expected_solution": {
+    "assignments": [
+      {"task_id": "task1", "resource_id": "beta"},
+      {"task_id": "task2", "resource_id": "alpha"}
+    ],
+    "status": "OPTIMAL"
+  }
+}

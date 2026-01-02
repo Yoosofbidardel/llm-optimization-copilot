@@ -1,0 +1,37 @@
+version: "3.9"
+services:
+  api:
+    build: ..
+    environment:
+      - API_HOST=0.0.0.0
+      - API_PORT=8010
+    ports:
+      - "8010:8010"
+    depends_on:
+      - mlflow
+  ui:
+    image: python:3.11-slim
+    working_dir: /app
+    volumes:
+      - ..:/app
+    command: bash -c "pip install --no-cache-dir -r requirements.txt && streamlit run ui/app.py --server.port 8502 --server.address 0.0.0.0"
+    environment:
+      - API_URL=http://api:8010
+    ports:
+      - "8502:8502"
+    depends_on:
+      - api
+  mlflow:
+    image: ghcr.io/mlflow/mlflow:v2.11.3
+    environment:
+      - MLFLOW_BACKEND_STORE_URI=sqlite:///mlflow.db
+      - MLFLOW_DEFAULT_ARTIFACT_ROOT=/mlartifacts
+    volumes:
+      - mlruns:/mlruns
+      - mlartifacts:/mlartifacts
+    command: mlflow server --host 0.0.0.0 --port 5000 --backend-store-uri sqlite:///mlflow.db --default-artifact-root /mlartifacts
+    ports:
+      - "5000:5000"
+volumes:
+  mlruns:
+  mlartifacts:
